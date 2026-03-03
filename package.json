@@ -1,0 +1,13 @@
+{
+  "name": "happycookieday",
+  "version": "1.0.0",
+  "description": "Happy Cookie Day - Özel tasarım kurabiyeler, pastalar ve tatlılar",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy-navigation": "^0.3.5"
+  }
+}

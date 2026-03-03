@@ -1,0 +1,18 @@
+---
+layout: base.njk
+---
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Ana Sayfa</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>{{ title }}</span>
+    </div>
+    <h1>{{ title }}</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="page-content">
+    {{ content | safe }}
+  </div>
+</div>

@@ -1,0 +1,237 @@
+backend:
+  name: github
+  repo: teomanakben-hash/happycookieday
+  branch: main
+  site_domain: happycookieday.netlify.app
+
+locale: "tr"
+
+media_folder: "static/images/uploads"
+public_folder: "/images/uploads"
+
+# Türkçe arayüz
+slug:
+  encoding: "ascii"
+  clean_accents: true
+
+collections:
+  # ==========================================
+  # KATEGORİLER
+  # Arkadaşın buradan yeni kategori/alt kategori ekleyebilir
+  # ==========================================
+  - name: "categories"
+    label: "Kategoriler"
+    label_singular: "Kategori"
+    folder: "src/categories"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} {{fields.parent}}"
+    sortable_fields: ["title", "order"]
+    fields:
+      - label: "Kategori Adı"
+        name: "title"
+        widget: "string"
+        hint: "Örn: Cookie, Pasta, Yan Ürünler"
+
+      - label: "Üst Kategori (Slug)"
+        name: "parent"
+        widget: "string"
+        required: false
+        hint: "Alt kategori ise üst kategorinin slug'ını yazın. Örn: 'pasta' veya 'yan-urunler'. Ana kategori ise boş bırakın."
+
+      - label: "Açıklama"
+        name: "description"
+        widget: "text"
+        required: false
+        hint: "Kategori açıklaması (isteğe bağlı)"
+
+      - label: "Kapak Görseli"
+        name: "image"
+        widget: "image"
+        required: false
+        hint: "Kategori kartında görünecek görsel"
+
+      - label: "Sıralama"
+        name: "order"
+        widget: "number"
+        default: 10
+        hint: "Küçük sayılar önce görünür"
+
+      - label: "Aktif mi?"
+        name: "active"
+        widget: "boolean"
+        default: true
+
+    # Sayfayı oluşturacak layout
+    meta:
+      path:
+        widget: "string"
+        label: "Path"
+        index_file: "index"
+
+  # ==========================================
+  # ÜRÜNLER
+  # Arkadaşın buradan yeni ürün ekleyebilir
+  # ==========================================
+  - name: "products"
+    label: "Ürünler"
+    label_singular: "Ürün"
+    folder: "src/products"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} ({{fields.category}})"
+    sortable_fields: ["title", "order", "category"]
+    fields:
+      - label: "Ürün Adı"
+        name: "title"
+        widget: "string"
+        hint: "Örn: Çikolatalı Soft Cookie"
+
+      - label: "Kategori (Slug)"
+        name: "category"
+        widget: "string"
+        hint: "Hangi kategoriye ait? Kategori slug'ını yazın. Örn: 'soft-cookie', 'kiz-cocuk-pastalari'"
+
+      - label: "Açıklama"
+        name: "description"
+        widget: "text"
+        required: false
+
+      - label: "Detay"
+        name: "body"
+        widget: "markdown"
+        required: false
+        hint: "Ürün hakkında detaylı bilgi (isteğe bağlı)"
+
+      - label: "Ürün Görselleri"
+        name: "images"
+        widget: "list"
+        hint: "Birden fazla görsel ekleyebilirsiniz"
+        field:
+          label: "Görsel"
+          name: "image"
+          widget: "image"
+
+      - label: "Fiyat"
+        name: "price"
+        widget: "string"
+        required: false
+        hint: "Örn: 250 TL veya 'Fiyat için iletişime geçin'"
+
+      - label: "Shopier Linki"
+        name: "shopier_url"
+        widget: "string"
+        required: false
+        hint: "Shopier ürün sayfası URL'si"
+
+      - label: "WhatsApp Sipariş Mesajı"
+        name: "whatsapp_text"
+        widget: "string"
+        required: false
+        hint: "Otomatik WhatsApp mesaj metni. Örn: 'Merhaba, Çikolatalı Soft Cookie sipariş vermek istiyorum'"
+
+      - label: "Sıralama"
+        name: "order"
+        widget: "number"
+        default: 10
+        hint: "Küçük sayılar önce görünür"
+
+      - label: "Öne Çıkan Ürün"
+        name: "featured"
+        widget: "boolean"
+        default: false
+        hint: "Ana sayfada gösterilsin mi?"
+
+      - label: "Aktif mi?"
+        name: "active"
+        widget: "boolean"
+        default: true
+
+  # ==========================================
+  # SAYFALAR
+  # Hakkımızda, İletişim, Medyada Biz
+  # ==========================================
+  - name: "pages"
+    label: "Sayfalar"
+    label_singular: "Sayfa"
+    folder: "src/pages"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - label: "Sayfa Başlığı"
+        name: "title"
+        widget: "string"
+
+      - label: "İçerik"
+        name: "body"
+        widget: "markdown"
+
+      - label: "Kapak Görseli"
+        name: "image"
+        widget: "image"
+        required: false
+
+      - label: "Sıralama (Menüde)"
+        name: "order"
+        widget: "number"
+        default: 10
+
+  # ==========================================
+  # SİTE AYARLARI
+  # Genel site bilgileri, iletişim, sosyal medya
+  # ==========================================
+  - name: "settings"
+    label: "Site Ayarları"
+    files:
+      - name: "general"
+        label: "Genel Ayarlar"
+        file: "src/_data/site.json"
+        fields:
+          - label: "Site Adı"
+            name: "title"
+            widget: "string"
+            default: "Happy Cookie Day"
+
+          - label: "Site Açıklaması"
+            name: "description"
+            widget: "text"
+
+          - label: "Telefon"
+            name: "phone"
+            widget: "string"
+            hint: "+90 5XX XXX XX XX formatında"
+
+          - label: "E-mail"
+            name: "email"
+            widget: "string"
+
+          - label: "WhatsApp Numarası"
+            name: "whatsapp"
+            widget: "string"
+            hint: "905XXXXXXXXX formatında (başında + olmadan)"
+
+          - label: "Instagram URL"
+            name: "instagram"
+            widget: "string"
+            required: false
+
+          - label: "Facebook URL"
+            name: "facebook"
+            widget: "string"
+            required: false
+
+          - label: "Shopier Mağaza URL"
+            name: "shopier_url"
+            widget: "string"
+            hint: "Ana Shopier mağaza linki"
+
+          - label: "Adres"
+            name: "address"
+            widget: "text"
+            required: false
+
+          - label: "Yapım Aşamasında Modu"
+            name: "under_construction"
+            widget: "boolean"
+            default: true
+            hint: "Açık = 'Yakında Açılıyoruz' sayfası gösterilir. Kapalı = Asıl site görünür."

@@ -1,0 +1,111 @@
+---
+layout: base.njk
+pagination:
+  data: collections.allCategories
+  size: 1
+  alias: category
+permalink: "/kategori/{{ category.fileSlug }}/"
+eleventyComputed:
+  title: "{{ category.data.title }}"
+  pageTitle: "{{ category.data.title }} | Happy Cookie Day"
+---
+
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Ana Sayfa</a>
+      <span class="breadcrumb-sep">›</span>
+      {% if category.data.parent %}
+        {% for cat in collections.allCategories %}
+          {% if cat.fileSlug == category.data.parent %}
+            <a href="/kategori/{{ cat.fileSlug }}/">{{ cat.data.title }}</a>
+            <span class="breadcrumb-sep">›</span>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      <span>{{ category.data.title }}</span>
+    </div>
+    <h1>{{ category.data.title }}</h1>
+    {% if category.data.description %}
+    <p class="hero-subtitle" style="margin-top: 0.5rem;">{{ category.data.description }}</p>
+    {% endif %}
+  </div>
+</div>
+
+<div class="container">
+  <!-- Sub Categories -->
+  {% set subCats = collections.allCategories | byParent(category.fileSlug) %}
+  {% if subCats | length %}
+  <section class="section">
+    <h2 class="section-title">Alt Kategoriler</h2>
+    <div class="category-grid" style="margin-top: 1.5rem;">
+      {% for sub in subCats %}
+      {% if sub.data.active !== false %}
+      <a href="/kategori/{{ sub.fileSlug }}/" class="category-card">
+        {% if sub.data.image %}
+        <div class="category-card-img">
+          <img src="{{ sub.data.image }}" alt="{{ sub.data.title }}" loading="lazy">
+        </div>
+        {% endif %}
+        <div class="category-card-body">
+          <h3 class="category-card-title">{{ sub.data.title }}</h3>
+          {% if sub.data.description %}
+          <p class="category-card-desc">{{ sub.data.description }}</p>
+          {% endif %}
+        </div>
+      </a>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- Products in this category -->
+  {% set categoryProducts = collections.allProducts | byCategory(category.fileSlug) %}
+  {% if categoryProducts | length %}
+  <section class="section">
+    {% if subCats | length %}
+    <h2 class="section-title">Ürünler</h2>
+    {% endif %}
+    <div class="product-grid" style="margin-top: 1.5rem;">
+      {% for product in categoryProducts %}
+      {% if product.data.active !== false %}
+      <div class="product-card">
+        {% if product.data.images and product.data.images[0] %}
+        <div class="product-card-img">
+          <img src="{{ product.data.images[0].image or product.data.images[0] }}" alt="{{ product.data.title }}" loading="lazy">
+        </div>
+        {% endif %}
+        <div class="product-card-body">
+          <h3 class="product-card-title">{{ product.data.title }}</h3>
+          {% if product.data.description %}
+          <p class="category-card-desc">{{ product.data.description }}</p>
+          {% endif %}
+          {% if product.data.price %}
+          <p class="product-card-price">{{ product.data.price }}</p>
+          {% endif %}
+          {% if product.data.shopier_url %}
+          <a href="{{ product.data.shopier_url }}" target="_blank" rel="noopener" class="product-card-btn">
+            Sipariş Ver
+          </a>
+          {% elif site.whatsapp and product.data.whatsapp_text %}
+          <a href="https://wa.me/{{ site.whatsapp }}?text={{ product.data.whatsapp_text | urlencode }}" target="_blank" rel="noopener" class="product-card-btn">
+            WhatsApp Sipariş
+          </a>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- If no subcats and no products -->
+  {% if not subCats.length and not categoryProducts.length %}
+  <section class="section" style="text-align: center; padding: 4rem 0;">
+    <p style="color: var(--text-light); font-size: 1.1rem;">Bu kategoride henüz ürün bulunmuyor.</p>
+    <p style="color: var(--text-muted); margin-top: 0.5rem;">Yakında eklenecektir.</p>
+  </section>
+  {% endif %}
+</div>
