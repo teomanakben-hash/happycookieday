@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="/assets/css/style.css">
   {% if site.under_construction %}
   <style>
-    .uc-overlay{position:absolute;top:0;left:0;width:100%;min-height:100%;z-index:9999;font-family:'DM Sans',sans-serif;background:var(--warm-white);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow-y:auto;overflow-x:hidden;padding:2rem 0}
+    .uc-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;font-family:'DM Sans',sans-serif;background:var(--warm-white);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow-y:auto;overflow-x:hidden;padding:3rem 0}
     .uc-overlay::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:radial-gradient(circle at 20% 20%,rgba(123,45,59,.03) 0%,transparent 50%),radial-gradient(circle at 80% 80%,rgba(196,149,106,.04) 0%,transparent 50%),radial-gradient(circle at 50% 50%,rgba(123,45,59,.02) 0%,transparent 70%);pointer-events:none;z-index:0}
     .deco{position:fixed;opacity:.06;font-size:3rem;animation:float 12s ease-in-out infinite;pointer-events:none;z-index:0}.deco:nth-child(2){top:10%;left:5%;animation-delay:0s}.deco:nth-child(3){top:60%;right:8%;animation-delay:-3s;font-size:2.5rem}.deco:nth-child(4){bottom:15%;left:12%;animation-delay:-6s;font-size:2rem}.deco:nth-child(5){top:25%;right:15%;animation-delay:-9s;font-size:1.8rem}.deco:nth-child(6){bottom:30%;right:20%;animation-delay:-4s;font-size:2.2rem}
     @keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}33%{transform:translateY(-15px) rotate(5deg)}66%{transform:translateY(10px) rotate(-3deg)}}
