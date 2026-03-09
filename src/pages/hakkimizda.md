@@ -2,7 +2,7 @@
 layout: page.njk
 title: Hakkımızda
 permalink: /hakkimizda/
-image: ""
+image: https://dmih5ui1qqea9.cloudfront.net/user_template_assets/Happycookieday_ad93e0220fe47289e57b5c802b1b09d8.jpeg
 order: 1
 ---
 **Happy Cookie Day**, 2006 yılında Didem Akben tarafından hayata geçirilmiş bir markadır.
