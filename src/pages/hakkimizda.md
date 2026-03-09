@@ -2,7 +2,7 @@
 layout: page.njk
 title: Hakkımızda
 permalink: /hakkimizda/
-image: /images/uploads/shop_bademli_kruvasan_3.jpeg
+image: ""
 order: 1
 ---
 **Happy Cookie Day**, 2006 yılında Didem Akben tarafından hayata geçirilmiş bir markadır.
