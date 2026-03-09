@@ -2,6 +2,7 @@
 layout: page.njk
 title: İletişim
 permalink: /iletisim/
+image: /images/uploads/shop_funfetti_cookies_1a.jpeg
 order: 3
 ---
 Telefon: 0212 234 0 999
